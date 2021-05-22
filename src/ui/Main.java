@@ -1,6 +1,7 @@
 package ui;
 
-import java.util.Iterator;
+import model.Stripe;
+import thread.StripeThread;
 
 public class Main {
 	
@@ -24,30 +25,24 @@ public class Main {
 		int length = 1;
 		int maxL = 10;
 		
-		for (int i = 1; i <max; i++) {
-			
-			for (int j = 1; j <maxL; j++) {
-				
-				System.out.println(ESC +  j + ";" + i + "H");
-				
-				System.out.print(ESC+yellow+"m"+" ");
-				
-				System.out.print(ESC+yellow+"m"+" ");
-				
-				Thread.sleep(50);
-				
-			}
-			
-			
-			
-			
-		}
 		
+		Stripe yellowS = new Stripe(yellow, 1, 100, 10, 25);
+		Stripe blueS = new Stripe(blue, 10, 100, 15, 50);
+		Stripe redS = new Stripe(red, 15, 100, 20, 50);
 		
+		StripeThread yellowST = new StripeThread(yellowS);
+		StripeThread blueST = new StripeThread(blueS);
+		StripeThread redST = new StripeThread(redS);
 		
-	
+		yellowST.start();
+		blueST.start();
+		redST.start();
 		
-		
+		yellowST.join();
+		blueST.join();
+		redST.join();
+
+				
 		
 	
 
